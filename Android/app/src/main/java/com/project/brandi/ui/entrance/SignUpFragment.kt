@@ -7,8 +7,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.project.brandi.R
 import com.project.brandi.data.user.User
@@ -67,6 +69,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private fun createUser() {
         val user = User(
+            null,
             etName.text.toString(),
             etEmail.text.toString(),
             etPassword.text.toString()
@@ -84,13 +87,16 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    // 멤버 생성 성공
-//                    val intent = Intent(this, MainActivity::class.java)
-//                    intent.putExtra("id", response.data?.id)
-//                    startActivity(intent)
-//                    finish()
                     Log.e("TAG", "setCreateResponse: ${response.data}")
                     rootLayout.snackBar("회원가입")
+                    findNavController().navigate(
+                        R.id.action_signUpFragment_to_signInFragment,
+                        bundleOf(
+                            "email" to etEmail.text.toString(),
+                            "password" to etPassword.text.toString()
+                        )
+                    )
+                    this.onDestroy()
                 }
                 is Resource.Error -> {
                     hideProgressBar()

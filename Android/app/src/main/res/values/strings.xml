@@ -14,4 +14,5 @@
     <string name="info">"내 정보"</string>
     <string name="signIn">로그인</string>
     <string name="signUp">회원가입</string>
+    <string name="logout">로그아웃</string>
 </resources>

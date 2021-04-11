@@ -2,17 +2,22 @@ package com.project.brandi.ui.entrance
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navArgs
 import com.google.gson.Gson
+import com.project.brandi.App
 import com.project.brandi.R
 import com.project.brandi.data.user.User
 import com.project.brandi.data.user.UserRepository
+import com.project.brandi.ui.info.InfoFragment
 import com.project.brandi.util.Resource
 import com.project.brandi.util.snackBar
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -36,15 +41,23 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
         setFindViewById(view)
         setOnClickListener()
-        setCreateResponse()
+        setLoginResponse()
 
-        test()
+        setEmailAndPassword()
     }
 
     @SuppressLint("SetTextI18n")
-    private fun test() {
-        etEmail.setText("qwe")
-        etPassword.setText("qwe123")
+    private fun setEmailAndPassword() {
+        val id = arguments?.getString("email", "")
+        val password = arguments?.getString("password", "")
+
+        if(id == "" && password == "") {
+            etEmail.setText("azqazq195@gmail.com")
+            etPassword.setText("qwe123")
+        } else {
+            etEmail.setText(id)
+            etPassword.setText(password)
+        }
     }
 
     private fun setFindViewById(view: View) {
@@ -65,6 +78,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     private fun login() {
         val user = User(
             null,
+            null,
             etEmail.text.toString(),
             etPassword.text.toString()
         )
@@ -76,18 +90,21 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         )
     }
 
-    private fun setCreateResponse() {
-        viewModel.createUser.observe(viewLifecycleOwner, { response ->
+    private fun setLoginResponse() {
+        viewModel.loginUser.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    // 멤버 생성 성공
-//                    val intent = Intent(this, MainActivity::class.java)
-//                    intent.putExtra("id", response.data?.id)
-//                    startActivity(intent)
-//                    finish()
-                    Log.e("TAG", "setCreateResponse: ${response.data}")
-                    rootLayout.snackBar("로그인")
+                    response.data?.let {
+                        rootLayout.snackBar(it.message)
+                        if (it.message == "login completed") {
+                            App.prefs.putString("_id", it.user._id!!)
+                            App.prefs.putString("name", it.user.name!!)
+                            App.prefs.putString("email", it.user.email!!)
+                            findNavController().navigate(R.id.action_signInFragment_to_infoFragment)
+                            this.onDestroy()
+                        }
+                    }
                 }
                 is Resource.Error -> {
                     hideProgressBar()

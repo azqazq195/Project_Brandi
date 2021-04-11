@@ -1,6 +1,6 @@
 package com.project.brandi.data.user
 
-data class EntranceResponse(
+data class CreateResponse(
     val id: String?,
     val message: String
 )
