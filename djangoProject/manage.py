@@ -18,5 +18,28 @@ def main():
     execute_from_command_line(sys.argv)
 
 
+# def test():
+#     from api_basic.models import Article
+#     from api_basic.serializers import ArticleSerializer
+#     from rest_framework.renderers import JSONRenderer
+#     from rest_framework.parsers import JSONParser
+#
+#     a = Article(title='Article Title', author='Moseoh', email='azqazq195@gmail.com')
+#     a.save()
+#     a = Article(title='New Article', author='John', email='John@gmail.com')
+#     a.save()
+#
+#     serializer = ArticleSerializer(a)
+#     print(serializer.data)
+#
+#     content = JSONRenderer().render(serializer.data)
+#     print(content)
+#
+#     serializer = ArticleSerializer(Article.objects.all(), many=True)
+#     print(serializer.data)
+
+
 if __name__ == '__main__':
     main()
+    # test()
+
