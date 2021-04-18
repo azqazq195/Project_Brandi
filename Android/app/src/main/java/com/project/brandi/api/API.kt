@@ -1,6 +1,7 @@
 package com.project.brandi.api
 
 import com.project.brandi.data.order.OrderResponse
+import com.project.brandi.data.order.PurchaseResponse
 import com.project.brandi.data.product.ProductResponse
 import com.project.brandi.data.user.CreateResponse
 import com.project.brandi.data.user.LoginResponse
@@ -30,5 +31,10 @@ interface API {
     @POST("/order/")
     suspend fun orderProduct(
         @Body order: RequestBody
+    ): Response<PurchaseResponse>
+
+    @GET("/order/")
+    suspend fun getOrder(
+        @Query("token") token: String
     ): Response<OrderResponse>
 }

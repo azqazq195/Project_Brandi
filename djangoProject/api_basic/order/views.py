@@ -11,6 +11,7 @@ from djangoProject.settings import SECRET_KEY
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
+from django.core import serializers
 
 
 # Create your views here.
@@ -22,8 +23,12 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 
 class OrderAPI(APIView):
-    def get(self):
-        return None
+    def get(self, request):
+        data = request.query_params.get('token')
+        decoded = jwt.decode(data, SECRET_KEY, algorithms='HS256')
+        orders = Order.objects.all().filter(userId=decoded['token'])
+        serializer = OrderSerializer(orders, many=True)
+        return Response({"orders": serializer.data}, status.HTTP_200_OK)
 
     def post(self, request):
         data = json.loads(request.body)

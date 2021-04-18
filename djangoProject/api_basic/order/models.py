@@ -1,4 +1,5 @@
 from django.db import models
+from api_basic.product.models import Product
 
 
 # Create your models here.
@@ -10,5 +11,5 @@ class Order(models.Model):
     status = models.CharField(max_length=120)
 
     def __str__(self):
-        return self.userId
+        return self.productId
 

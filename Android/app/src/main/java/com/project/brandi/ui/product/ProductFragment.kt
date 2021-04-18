@@ -55,7 +55,7 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
         btnBuy.setOnClickListener {
             val userId = App.prefs.getString("token")
             val productId = product["productId"].toString()
-            val order = Order(userId.toString(), productId, null,null)
+            val order = Order(null, userId.toString(), productId, null,null)
             val gson = Gson().toJson(order)
             Log.e("TAG", "setOnClickListener: ${gson}")
             viewModel.orderProduct(

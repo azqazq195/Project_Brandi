@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
@@ -43,6 +44,12 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
                 attach(this@InfoFragment)
                 commit()
             }
+        }
+
+        view?.findViewById<Button>(R.id.btnOrder)?.setOnClickListener {
+            view?.findNavController()?.navigate(
+                R.id.action_infoFragment_to_orderFragment
+            )
         }
     }
 

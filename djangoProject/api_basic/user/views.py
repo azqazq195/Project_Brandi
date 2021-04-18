@@ -20,14 +20,18 @@ class UserViewSet(viewsets.ModelViewSet):
 class SignUp(APIView):
     def post(self, request):
         data = json.loads(request.body)
+        print(data)
         try:
             if User.objects.filter(email=data['email']).exists():
                 return Response({"message": "EXISTS_EMAIL"}, status.HTTP_400_BAD_REQUEST)
 
+            name = data['name']
+            email = data['email']
+            password = bcrypt.hashpw(data['password'].encode('UTF-8'), bcrypt.gensalt()).decode('UTF-8')
             User.objects.create(
-                name=data['name'],
-                email=data['email'],
-                password=bcrypt.hashpw(data['password'].encode('UTF-8'), bcrypt.gensalt()).decode('UTF-8')
+                name=name,
+                email=email,
+                password=password
             ).save()
             return Response({"message": "Create User"}, status.HTTP_200_OK)
         except Exception as ex:
