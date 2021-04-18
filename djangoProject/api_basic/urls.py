@@ -16,8 +16,6 @@ router.register('order', OrderViewSet, basename='order')
 urlpatterns = [
     path('viewset/', include(router.urls)),
     path('viewset/<int:pk>', include(router.urls)),
-    # path('article/', article_list),
-    # path('article/details/<int:pk>', article_details),
     path('article/', ArticleAPIView.as_view()),
     path('product/', ProductAPIView.as_view()),
     path('user/signin/', SignIn.as_view()),

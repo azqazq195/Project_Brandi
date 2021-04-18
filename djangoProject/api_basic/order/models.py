@@ -3,7 +3,6 @@ from api_basic.product.models import Product
 
 
 # Create your models here.
-
 class Order(models.Model):
     userId = models.IntegerField()
     productId = models.CharField(max_length=120)
