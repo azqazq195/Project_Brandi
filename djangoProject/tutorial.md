@@ -1,5 +1,6 @@
 # 장고 프로젝트
 
+## 튜토리얼
 
 ### 초기 설정
 ```shell
@@ -14,13 +15,7 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-## 관리자 계정에서 모델 관리
-
-models.py 에서 Article class 작성 후 마이그레이션
-```shell
-python manage.py makemigrations
-python manage.py migrate
-```
+### 관리자 계정에서 모델 관리
 
 admin.py 에 등록
 
@@ -33,7 +28,15 @@ from .models import Article
 admin.site.register(Article)
 ```
 
-## View 만들기
+### 모델 만들기
+
+models.py 에서 class 작성 후 마이그레이션
+```shell
+python manage.py makemigrations
+python manage.py migrate
+```
+
+### View 만들기
 
 Article 에 등록된 데이터를 JSON 형식으로 내보내 준다.
 
@@ -64,7 +67,7 @@ def article_list(request):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 ```
 
-## URL 등록
+### URL 등록
 
 프로젝트 폴더의 url 에서 api 폴더의 url 을 등록해준다.
 
