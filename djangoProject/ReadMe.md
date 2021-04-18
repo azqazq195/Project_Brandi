@@ -35,6 +35,7 @@ class Order(models.Model):
 ### User
 
 User 비밀번호 암호화 => bcrypt 라이브러리
+
 ![viewset user list](https://user-images.githubusercontent.com/45132207/115148814-46512f00-a09c-11eb-903e-ab48b25402f0.PNG)
 
 User 정보 확인시 토큰 활용
