@@ -13,5 +13,6 @@
 | 데이터베이스| sqlite |
 | 사용 언어 | kotlin, python |
 
-## [Android](https://github.com/azqazq195/Project_Brandi/tree/main/Android)
-## [Backend](https://github.com/azqazq195/Project_Brandi/tree/main/djangoProject)
+상세보기
+[Android](https://github.com/azqazq195/Project_Brandi/tree/main/Android)
+[Backend](https://github.com/azqazq195/Project_Brandi/tree/main/djangoProject)
