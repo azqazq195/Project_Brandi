@@ -16,7 +16,7 @@ class SharedPreferences(context: Context) {
 
     fun removeAll() {
         prefs.edit().apply {
-            remove("_id")
+            remove("token")
             remove("name")
             remove("email")
         }.apply()

@@ -30,7 +30,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
@@ -41,8 +41,7 @@
                     android:id="@+id/tvProductName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="상품이름"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="상품이름ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 

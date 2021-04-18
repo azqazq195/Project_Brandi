@@ -15,6 +15,7 @@ import androidx.navigation.navArgs
 import com.google.gson.Gson
 import com.project.brandi.App
 import com.project.brandi.R
+import com.project.brandi.data.product.Product
 import com.project.brandi.data.user.User
 import com.project.brandi.data.user.UserRepository
 import com.project.brandi.ui.info.InfoFragment
@@ -44,6 +45,12 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         setLoginResponse()
 
         setEmailAndPassword()
+        test()
+    }
+
+    private fun test() {
+        etEmail.setText("azqazq195@gmail.com2")
+        etPassword.setText("qwe123")
     }
 
     @SuppressLint("SetTextI18n")
@@ -97,8 +104,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                     hideProgressBar()
                     response.data?.let {
                         rootLayout.snackBar(it.message)
-                        if (it.message == "login completed") {
-                            App.prefs.putString("_id", it.user._id!!)
+                        if (it.message == "Sign In Complete") {
+                            App.prefs.putString("token", it.user.token!!)
                             App.prefs.putString("name", it.user.name!!)
                             App.prefs.putString("email", it.user.email!!)
                             findNavController().navigate(R.id.action_signInFragment_to_infoFragment)

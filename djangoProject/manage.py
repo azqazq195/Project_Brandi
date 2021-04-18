@@ -38,8 +38,19 @@ def main():
 #     serializer = ArticleSerializer(Article.objects.all(), many=True)
 #     print(serializer.data)
 
+def test():
+    print("TEST")
+    import jwt
+    from djangoProject.settings import SECRET_KEY
+    encoded = jwt.encode({"name": "문성하"}, SECRET_KEY, algorithm='HS256')
+    print({"token": encoded})
+    decoded = jwt.decode(encoded, SECRET_KEY, algorithms='HS256')
+    print(decoded)
+    decoded = jwt.decode("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbiI6Mn0._5lRKHUSXDGVxhickAlllZEf5yBET3QrqgdRr8ZdJGE", SECRET_KEY, algorithms='HS256')
+    print(decoded)
+    print(decoded.get('token'))
+
 
 if __name__ == '__main__':
     main()
     # test()
-

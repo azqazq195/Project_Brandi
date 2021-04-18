@@ -4,13 +4,21 @@ from rest_framework import status, generics, mixins
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication, BaseAuthentication
+# from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets
+from django.shortcuts import get_object_or_404
 from .models import Article
 from .serializers import ArticleSerializer
 
 
 # Create your views here.
+
+
+class ArticleViewSet(viewsets.ModelViewSet):
+    serializer_class = ArticleSerializer
+    queryset = Article.objects.all()
 
 
 class GenericAPIView(generics.GenericAPIView, mixins.DestroyModelMixin,
@@ -19,7 +27,8 @@ class GenericAPIView(generics.GenericAPIView, mixins.DestroyModelMixin,
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
     lookup_field = 'id'
-    authentication_classes = [SessionAuthentication, BaseAuthentication]
+    # authentication_classes = [SessionAuthentication, BasicAuthentication]
+    authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request, id=None):

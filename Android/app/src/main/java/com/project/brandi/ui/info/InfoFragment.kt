@@ -26,7 +26,7 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
     }
 
     private fun isMember() : Boolean {
-        return App.prefs.getString("_id") != ""
+        return App.prefs.getString("token") != ""
     }
 
     private fun member() {

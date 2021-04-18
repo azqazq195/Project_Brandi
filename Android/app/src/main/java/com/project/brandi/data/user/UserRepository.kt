@@ -5,8 +5,8 @@ import okhttp3.RequestBody
 
 class UserRepository {
     suspend fun createUser(user: RequestBody) =
-        RetrofitInstance.api.createUser(user)
+        RetrofitInstance.api.signUp(user)
 
     suspend fun loginUser(user: RequestBody) =
-        RetrofitInstance.api.loginUser(user)
+        RetrofitInstance.api.signIn(user)
 }
